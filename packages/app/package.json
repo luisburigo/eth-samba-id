@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.28.6",
-    "@web3modal/wagmi": "^4.1.1",
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.2",
+    "@tanstack/react-query": "^5.28.6",
+    "@tanstack/react-router": "^1.22.3",
+    "@tanstack/router-devtools": "^1.22.3",
+    "@web3modal/wagmi": "^4.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "viem": "^2.8.18",
