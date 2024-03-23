@@ -1,7 +1,7 @@
 const colors = {
-  "yellow-medium": "#B68F40",
-  "yellow-light": "#FFC010",
-  "semi-transparent": "rgba(73,71,71,0.19)",
+  'yellow-medium': '#B68F40',
+  'yellow-light': '#FFC010',
+  'semi-transparent': 'rgba(73,71,71,0.19)',
   brand: {
     200: "#80F9C5",
     500: "#14E293",
