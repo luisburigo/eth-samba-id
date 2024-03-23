@@ -1,17 +1,11 @@
-import { useWeb3Modal } from '@web3modal/wagmi/react';
+import { RouterProvider } from '@tanstack/react-router';
+import { router } from './routes';
 
 function App() {
-  const { open } = useWeb3Modal();
+  // @TODO: Here should use the hook that connects with the wallet
+  const isConnected = false;
 
-  return (
-    <main>
-      <p>Wallet Connector</p>
-      <button onClick={() => open()}>Open Connect Modal</button>
-      <button onClick={() => open({ view: 'Networks' })}>
-        Open Network Modal
-      </button>
-    </main>
-  );
+  return <RouterProvider router={router} context={{ isConnected }} />;
 }
 
 export default App;

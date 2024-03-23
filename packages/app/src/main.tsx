@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';;
-import { defaultTheme } from './theme/default.ts';;
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
+import { defaultTheme } from './theme/default.ts';
 import Web3ModalProvider from './providers/walletConnector/connectProvider.tsx';
 import App from './App.tsx';
 

@@ -35,7 +35,7 @@ describe("Counter", () => {
             const initialValue = 0
             const { _counter } = await loadFixture(deploy)
             await _counter.incrementCounter();
-
+            
             expect(await _counter.counter()).to.equal(initialValue+1)
             expect(await _counter.counter()).to.equal(await _counter.getCounter())
 
