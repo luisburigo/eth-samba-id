@@ -10,8 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.28.6",
+    "@web3modal/wagmi": "^4.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "viem": "^2.8.18",
+    "wagmi": "^2.5.12"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
