@@ -9,8 +9,11 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { Assets } from '../assets';
+// import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 const Home = () => {
+  // const { open } = useWeb3Modal();
+
   return (
     <Center w="full" h="full" alignItems="start" zIndex={10}>
       {/* opt-out for a margin top, and items start, aiming better center in screen, counting the header size */}
@@ -20,6 +23,8 @@ const Home = () => {
         spacing={6}
         padding={{ base: 4, md: 0 }}
       >
+        {/* <Button onClick={() => open()}>Connect Wallet</Button> */}
+        <w3m-button />
         <Text
           className="bg-pan-tl"
           bgClip="text"
