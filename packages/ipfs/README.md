@@ -32,27 +32,12 @@ ID               Name           Created At                Current
 
 ```
 
-Use `uploadProjectFiles()` method to upload files
+Create a IPFS Client
 ```ts
 import { uploadProjectFiles } from './src';
 
-uploadProjectFiles({
-  name: 'my-ipfs-landing',
-  files: [
-    {name: 'index.html', content: Buffer.from("ok main", 'utf8')},
-  ]
-}).then(console.log);
-
-/*
-[
-  {
-    cid: CID(QmPHqYXGVzrXyGw7asHzxDCGHAm7KdeHiJdp2iBNNJidxK),
-    ipfs: 'https://ipfs.io/ipfs/QmPHqYXGVzrXyGw7asHzxDCGHAm7KdeHiJdp2iBNNJidxK'
-  },
-  {
-    cid: CID(QmT5pyqTcYhHV15pTBNeP64XFqaA6rX8TNFXRYkCTntxWv),
-    ipfs: 'https://ipfs.io/ipfs/QmT5pyqTcYhHV15pTBNeP64XFqaA6rX8TNFXRYkCTntxWv'
-  }
-]
-*/
+const ipfsClient = createIpfsClient({
+  projectId: <PROJECT_ID>,
+  personalAccessToken: <PAT>,
+});
 ```
