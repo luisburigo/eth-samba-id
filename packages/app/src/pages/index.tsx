@@ -1,17 +1,7 @@
-import {
-  Box,
-  Button,
-  Center,
-  Divider,
-  HStack,
-  Image,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
-import { Assets } from '../assets';
+import { Box, Button, Center, Divider, HStack, Text, VStack } from '@chakra-ui/react';
 // import { useWeb3Modal } from '@web3modal/wagmi/react';
 
-const Home = () => {
+export default function Page() {
   // const { open } = useWeb3Modal();
 
   return (
@@ -83,7 +73,7 @@ const Home = () => {
               <Text fontSize={11} color="yellow-medium" fontWeight={'bold'}>
                 Learn more
               </Text>
-              <Image w={4} src={Assets.arrowShare} />
+              {/*<Image w={4} src={Assets.arrowShare} />*/}
             </HStack>
           </VStack>
         </Box>
@@ -91,5 +81,3 @@ const Home = () => {
     </Center>
   );
 };
-
-export { Home };

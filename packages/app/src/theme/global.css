@@ -29,9 +29,26 @@
 }
 
 .bg-pan-tl {
-  background: linear-gradient(to bottom right, #FFC010, #B24F18);
+  background: linear-gradient(to bottom right, #ef5766, #5031a9);
   background-size: 200%;
   -webkit-background-clip: text;
   background-clip: text;
   animation: bg-pan-tl 3s alternate infinite;
+}
+
+/**
+ * ----------------------------------------
+ * background top left
+ * ----------------------------------------
+ */
+@keyframes bg-pan-tl {
+  from {
+    background-position: 100% 100%;
+  }
+  50% {
+    background-position: 60% 60%;
+  }
+  to {
+    background-position: 0 0;
+  }
 }

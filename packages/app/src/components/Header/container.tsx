@@ -1,11 +1,11 @@
 import { Center, Image } from '@chakra-ui/react';
 // import { Info } from '../user';
-import { useNavigate } from '@tanstack/react-router';
+import { useRouter } from 'next/router';
 
 export const Container = () => {
   // const { wallet } = useFuelConnect()
   // const { isFetching } = useIsConnected()
-  const navigate = useNavigate();
+  const router = useRouter()
 
   const account = () => {
     // @TODO: Wallet connect validation
@@ -20,7 +20,7 @@ export const Container = () => {
   };
 
   const goHome = () => {
-    navigate({ to: '/' }).then();
+    router.push('/').then();
   };
 
   return (
