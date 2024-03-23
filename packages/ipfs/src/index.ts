@@ -5,7 +5,7 @@ type UploadProjectFilesParams = {
   files: { name: string, content: Buffer }[]
 }
 
-async function uploadProjectFiles(params: UploadProjectFilesParams) {
+export async function uploadProjectFiles(params: UploadProjectFilesParams) {
   const { files, name } = params;
 
   const projectFiles = files.map(file => ({
@@ -20,10 +20,3 @@ async function uploadProjectFiles(params: UploadProjectFilesParams) {
     ipfs: `https://ipfs.io/ipfs/${result.cid}`
   }));
 }
-
-uploadProjectFiles({
-  name: Math.floor(Math.random() * 1000).toString(),
-  files: [
-    {name: 'index.html', content: Buffer.from("ok main", 'utf8')},
-  ]
-}).then(console.log)
