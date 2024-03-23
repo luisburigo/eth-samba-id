@@ -1,5 +1,4 @@
 import { useWeb3Modal } from '@web3modal/wagmi/react';
-import './App.css';
 
 function App() {
   const { open } = useWeb3Modal();
