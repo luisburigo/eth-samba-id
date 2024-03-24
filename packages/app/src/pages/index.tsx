@@ -1,8 +1,6 @@
 import { Box, Button, Center, Divider, HStack, Text, VStack } from '@chakra-ui/react';
-// import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 export default function Page() {
-  // const { open } = useWeb3Modal();
 
   return (
     <Center w="full" h="full" alignItems="start" zIndex={10}>
@@ -14,7 +12,6 @@ export default function Page() {
         padding={{ base: 4, md: 0 }}
       >
         {/* <Button onClick={() => open()}>Connect Wallet</Button> */}
-        <w3m-button />
         <Text
           className="bg-pan-tl"
           bgClip="text"

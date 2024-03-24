@@ -1,23 +1,8 @@
 import { Center, Image } from '@chakra-ui/react';
-// import { Info } from '../user';
 import { useRouter } from 'next/router';
 
 export const Container = () => {
-  // const { wallet } = useFuelConnect()
-  // const { isFetching } = useIsConnected()
   const router = useRouter()
-
-  const account = () => {
-    // @TODO: Wallet connect validation
-    // if(isFetching && wallet === undefined) {
-    //   return <Skeleton height="2.5rem" w="7rem" rounded={8} />
-    // }
-    // if(wallet) {
-    //   return <Info name="user" account={wallet.address} />
-    // }
-    // if(!isFetching && wallet === null) return <Box><Connect /></Box>
-    return <p>account</p>;
-  };
 
   const goHome = () => {
     router.push('/').then();
@@ -37,7 +22,7 @@ export const Container = () => {
       <button onClick={goHome}>
         <Image src="./symbol.svg" width={190} height={75} alt="Bako logo" />
       </button>
-      {account()}
+      <w3m-button />
     </Center>
   );
 };
