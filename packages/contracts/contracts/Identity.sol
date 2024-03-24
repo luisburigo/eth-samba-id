@@ -83,6 +83,46 @@ contract Identity {
         identity.resolver = resolver;
     }
 
+    function setData(
+        string memory name, 
+        string memory nft,
+        string memory ipfs, 
+        string memory github, 
+        string memory twitter, 
+        string memory warpcaster
+    ) public {
+        IdentityStruct storage identity = identities[name];
+        require(
+            msg.sender == identity.resolver,
+            "You are not the resolver of this identity"
+        );
+        
+        identity.nft = nft;
+        identity.ipfs = ipfs;
+        identity.github = github;
+        identity.twitter = twitter;
+        identity.warpcaster = warpcaster;
+    }
+
+
+    function renew(string memory name, uint validAt) public payable {
+        IdentityStruct storage identity = identities[name];
+        require(
+            msg.sender == identity.owner,
+            "You are not the owner of this identity"
+        );
+
+        //valida balance
+        uint fee = calculateRegistrationFee(name, validAt);
+        require(msg.value >= fee, "Insufficient funds");
+
+        // Pagar o owner
+        owner.transfer(msg.value);
+
+
+        identity.validAt += YEAR_SECOUNDS*1000*validAt;
+
+    }
 
 
     //utils
