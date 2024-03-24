@@ -53,8 +53,8 @@ export const Form = () => {
   const { writeContract, isPending } = useWriteContract({
     config,
     mutation: {
-      onSuccess: (data) => {
-        router.push(`/profile/${getValues('name')}`)
+      onSuccess: async (data) => {
+        await router.push(`/profile/@${getValues('name')}`)
       },
       onError: (error) => {
         console.log({ ERROR: error });
@@ -64,22 +64,6 @@ export const Form = () => {
 
   const onSubmit = async (data: IdentityForm) => {
     const fileUploadResult = await handlers.handleFileUpload(`@${data.name}`);
-    console.log('DATA: ', data, {
-      abi: identityAbi,
-      address: CONTRACT.IDENTITY,
-      functionName: 'createIdentity',
-      args: [
-        // @ts-ignore
-        data.name,
-        // @ts-ignore
-        BigInt(data.validAt),
-        data.nft,
-        'ipfs',// fileUploadResult?.data?.ipfs ?? '',
-        data.github,
-        data.twitter,
-        data.warpcaster
-      ]
-    });
     writeContract({
       abi: identityAbi,
       address: CONTRACT.IDENTITY,
