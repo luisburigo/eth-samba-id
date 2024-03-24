@@ -16,7 +16,7 @@ export default function Page() {
   const router = useRouter();
 
   const [input, setInput] = useState('')
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(null)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
 
   const { data, isLoading } = useReadContract({
     abi: identityAbi,
@@ -26,6 +26,7 @@ export default function Page() {
   });
 
   const searchDomain = () => {
+    // @ts-ignore
     if (data?.name?.length <= 0) {
       router.push(`/form`)
     } else {
@@ -35,7 +36,7 @@ export default function Page() {
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.length === 0) {
-      setErrorMessage(null)
+      setErrorMessage(undefined)
       setInput(e.target.value)
     }
     if(!checkDomain(e.target.value)) {

@@ -208,16 +208,6 @@ export const Form = () => {
         }} isLoading={isPending} loadingText="Loading...">
           Cancel
         </Button>
-        <Code display="block" whiteSpace="pre" overflowX="auto">
-          {JSON.stringify(
-            {
-              ...identityData.data,
-              validAt: identityData.data?.validAt.toString(),
-            },
-            null,
-            2
-          )}
-        </Code>
       </VStack>
     </form>
   );

@@ -110,7 +110,7 @@ export default function Domain() {
           <BuyComponents.Handles>
             {domains.map(
               ({ name }, index) =>
-                <BuyComponents.Info name={name} index={index} periodHandle={handlePeriodChange} />
+                <BuyComponents.Info key={index} name={name} index={index} periodHandle={handlePeriodChange} />
             )}
           </BuyComponents.Handles>
         </VStack>

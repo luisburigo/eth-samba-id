@@ -1,6 +1,7 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
 // import Add from '../Add';
 
+// @ts-ignore
 const Handles = ({ children }) => {
   return (
     <Box w="full">

@@ -1,6 +1,6 @@
-import { Handles } from './handles.tsx';
-import { Info } from './info.tsx';
-import { Checkout } from './checkout.tsx';
+import { Handles } from './handles';
+import { Info } from './info';
+import { Checkout } from './checkout';
 
 export const BuyComponents = {
   Handles: Handles,
