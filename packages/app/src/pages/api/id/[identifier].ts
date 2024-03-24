@@ -20,10 +20,10 @@ export default async function handler(
   const { identifier } = request.query;
   const identity = await getIdentity(identifier as string);
 
-  if (identity.ipfs) {
-    return response.status(304).redirect('https://cf-ipfs.com/ipfs/bafybeigi5ujoqw5nv7wlsdj7kywj4y4e4cc4ng774ec5k3gjupel2jfz4e');
+  if (identity.ipfs && identity.ipfs.includes('cf-ipfs.com')) {
+    return response.status(304).redirect(identity.ipfs);
   }
 
-  return response.status(304).redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/domain/${identifier}`);
+  return response.status(304).redirect(`${process.env.NEXT_PUBLIC_BASE_URL}/profile/${identifier}`);
   // return response.status(304).redirect('https://cf-ipfs.com/ipfs/bafybeigi5ujoqw5nv7wlsdj7kywj4y4e4cc4ng774ec5k3gjupel2jfz4e');
 }

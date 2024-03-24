@@ -4,13 +4,18 @@ import { GoBack } from '@/components/helpers/goBack';
 import { useAccount, useReadContract } from 'wagmi';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
+import { useRouter } from 'next/router'
 
 export default function Page() {
+  const router = useRouter()
+
+  const { identifier } = router.query
+
   const identityData = useReadContract({
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: ['Pedro'],
+    args: [identifier as string],
   });
 
   const account = useAccount();
@@ -33,7 +38,9 @@ export default function Page() {
       <Center w="full" h="full" pt={14}>
         <VStack w="full" h="full" maxW="42rem" gap={3}>
           <ProfileComponents.Hero name={identityData.data?.name ?? ''} />
+          {/* @ts-ignore */}
           <ProfileComponents.Account {...identityData.data} />
+          {/* @ts-ignore */}
           <ProfileComponents.Address addresses={account.addresses} />
           {/* <ProfileComponents.Ownership /> */}
           {/* <Profile /> */}
