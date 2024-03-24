@@ -26,6 +26,7 @@ export default async function POST(
     name: file.originalFilename,
     content: fs.readFileSync(file.path)
   }));
+
   const uploadResults = await ipfsClient.uploadProjectFiles({ files, name: data.fields.domain[0] });
   const responseData = uploadResults[0];
 

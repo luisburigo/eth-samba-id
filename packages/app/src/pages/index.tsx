@@ -51,14 +51,16 @@ export default function Page() {
               _hover={{ bgColor: 'button.600' }}
               onClick={
                 () => {
+                  // @ts-ignore
                   if (data?.name?.length <= 0) {
                     router.push(`/form`)
                   } else {
                     router.push(`/profile/${data?.name}`)
-                  } 
+                  }
                 }
               }
             >
+              {/* @ts-ignore */}
               { data?.name?.length <= 0  ? 'Buy Domain' : 'Check domain' }
             </Button>
 

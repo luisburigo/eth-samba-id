@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 const uploadFile = (formData: FormData) => fetch('/api/ipfs', {
   body: formData,
   method: 'post'
-});
+}).then(res => res.json());
 
 /*
 * Example how to use:
@@ -20,15 +20,17 @@ const uploadFile = (formData: FormData) => fetch('/api/ipfs', {
 
 const useIpfsUploader = () => {
   const [file, setFile] = useState<File | null>(null);
-  const { data, mutate, isSuccess, isPending } = useMutation({
+  const { data, mutateAsync, isSuccess, isPending } = useMutation({
     mutationFn: uploadFile
   });
 
   const handleFileUpload = async (domain: string) => {
+    if (!file) return Promise.resolve();
+
     const formData = new FormData();
     formData.set('domain', domain);
     formData.set('file', new Blob([await file!.arrayBuffer()], { type: file!.type }), file!.name);
-    mutate(formData);
+    return mutateAsync(formData);
   };
 
   const onInputFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {

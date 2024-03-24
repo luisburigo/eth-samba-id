@@ -27,7 +27,7 @@ export const createIpfsClient = (auth: IPFSClientAuth) => {
     const projectFiles = files.map(file => ({
       path: `${name}/${file.name}`,
       content: file.content,
-    }))
+    }));
 
     const uploadResults = await ipfsClient.addAll(projectFiles);
 

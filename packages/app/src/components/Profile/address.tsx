@@ -13,10 +13,11 @@ import {
 import { FaEthereum } from 'react-icons/fa';
 
 interface Props {
-  addresses: string[];
+  owner: string;
+  resolver: string;
 }
 
-export const Address = ({ addresses }: Props) => {
+export const Address = ({ owner, resolver }: Props) => {
   const toast = useToast();
 
   const handleCopyText = (address: string) => {
@@ -55,25 +56,37 @@ export const Address = ({ addresses }: Props) => {
         {/* <Button rightIcon={<AddIcon />}>Add</Button> */}
       </Box>
       <Box display="flex" flexDirection="column" gap={2}>
-        {addresses.map((address) => (
-          <InputGroup key={address}>
-            <InputLeftElement>
-              <Icon as={FaEthereum} />
-            </InputLeftElement>
-            <Input
-              placeholder="address"
-              textAlign="right"
-              value={address}
-              disabled
+        <InputGroup>
+          <InputLeftElement>
+            <Icon as={FaEthereum} />
+          </InputLeftElement>
+          <Input
+            placeholder="address"
+            textAlign="right"
+            value={owner}
+            disabled
+          />
+          <InputRightElement>
+            <CopyIcon onClick={() => handleCopyText(owner)} cursor="pointer" />
+          </InputRightElement>
+        </InputGroup>
+        <InputGroup>
+          <InputLeftElement>
+            <Icon as={FaEthereum} />
+          </InputLeftElement>
+          <Input
+            placeholder="address"
+            textAlign="right"
+            value={resolver}
+            disabled
+          />
+          <InputRightElement>
+            <CopyIcon
+              onClick={() => handleCopyText(resolver)}
+              cursor="pointer"
             />
-            <InputRightElement>
-              <CopyIcon
-                onClick={() => handleCopyText(address)}
-                cursor="pointer"
-              />
-            </InputRightElement>
-          </InputGroup>
-        ))}
+          </InputRightElement>
+        </InputGroup>
       </Box>
     </Box>
   );
