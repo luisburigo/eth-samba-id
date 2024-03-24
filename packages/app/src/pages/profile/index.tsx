@@ -1,7 +1,7 @@
 import { ProfileComponents } from '@/components/Profile';
 import { VStack, Center } from '@chakra-ui/react';
 import { GoBack } from '@/components/helpers/goBack';
-import { useAccount, useReadContract } from 'wagmi';
+import { useReadContract } from 'wagmi';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
 
@@ -10,10 +10,8 @@ export default function Page() {
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: ['Pedro'],
+    args: ['@pedropereira'],
   });
-
-  const account = useAccount();
 
   if (identityData.isLoading) {
     return <div>Loading...</div>;
@@ -34,7 +32,10 @@ export default function Page() {
         <VStack w="full" h="full" maxW="42rem" gap={3}>
           <ProfileComponents.Hero name={identityData.data?.name ?? ''} />
           <ProfileComponents.Account {...identityData.data} />
-          <ProfileComponents.Address addresses={account.addresses} />
+          <ProfileComponents.Address
+            owner={identityData.data?.owner ?? ''}
+            resolver={identityData.data?.resolver ?? ''}
+          />
           {/* <ProfileComponents.Ownership /> */}
           {/* <Profile /> */}
         </VStack>
