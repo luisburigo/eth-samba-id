@@ -1,40 +1,19 @@
-import { Box, Button, Center, Divider, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, HStack, Text, VStack } from '@chakra-ui/react';
+import { Home } from '@/components/Home';
+import { Input } from '@/components/input';
 
 export default function Page() {
 
   return (
     <Center w="full" h="full" alignItems="start" zIndex={10}>
-      {/* opt-out for a margin top, and items start, aiming better center in screen, counting the header size */}
       <VStack
         mt={{ base: '5rem', md: '13rem' }}
         textAlign="center"
         spacing={6}
         padding={{ base: 4, md: 0 }}
+        maxW="30rem"
       >
-        {/* <Button onClick={() => open()}>Connect Wallet</Button> */}
-        <Text
-          className="bg-pan-tl"
-          bgClip="text"
-          fontWeight={700}
-          fontSize={{ base: 35, md: 48 }}
-          lineHeight={1}
-          gap={2}
-        >
-          Your web3 username
-        </Text>
-
-        <Text fontSize={{ base: 12, md: 15 }} color={'text.700'}>
-          Your identity across web3, one name for all your crypto addresses,
-          <br />
-          and your decentralised website.
-        </Text>
-
-        <Divider
-          w="60%"
-          h="1px"
-          border="none"
-          bgGradient="linear(to-r, #FFC010, #B24F18)"
-        />
+        <Home.Hero title="Your web3 username" description="Your identity across web3, one name for all your crypto addresses, and your decentralised website." />
         <Box
           as="form"
           w="full"
@@ -43,9 +22,7 @@ export default function Page() {
           gap={4}
           // onSubmit={handleConfirmDomain}
         >
-          {/*<SearchInput onChange={handleChangeDomain} errorMessage={undefined} available={domainIsAvailable} />*/}
-
-          {/* Buttons */}
+          <Input.SearchDomain onChange={() => null} errorMessage={undefined} available={null} />
           <VStack w="full" display="flex" flexDir="column" gap={2}>
             <Button
               w="full"
@@ -77,4 +54,5 @@ export default function Page() {
       </VStack>
     </Center>
   );
-};
+}
+
