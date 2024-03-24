@@ -1,31 +1,26 @@
 import { ProfileComponents } from '@/components/Profile';
 import { VStack, Center } from '@chakra-ui/react';
 import { GoBack } from '@/components/helpers/goBack';
-import { useReadContract } from 'wagmi';
+import { useAccount, useReadContract } from 'wagmi';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 export default function Page() {
+
   const router = useRouter()
-
   const { identifier } = router.query
-
-
 
 
   const identityData = useReadContract({
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: [identifier as string],
+    args: [identifier as string],x
   });
 
-
-  useEffect(() => {
-    console.log(identityData.data)
-  }, [identityData])
+  const account = useAccount();
 
   if (identityData.isLoading) {
     return <div>Loading...</div>;
@@ -45,12 +40,8 @@ export default function Page() {
       <Center w="full" h="full" pt={14}>
         <VStack w="full" h="full" maxW="42rem" gap={3}>
           <ProfileComponents.Hero name={identityData.data?.name ?? ''} />
-          {/* @ts-ignore */}
-          <ProfileComponents.Account {...identityData.data} />
-          <ProfileComponents.Address 
-              owner ={identityData.data?.owner ?? ''}
-              resolver={identityData.data?.resolver ?? ''}
-          />
+          {/* <ProfileComponents.Account {...identityData.data} /> */}
+          {/* <ProfileComponents.Address addresses={account?.addresses ?? ''} /> */}
           {/* <ProfileComponents.Ownership /> */}
           {/* <Profile /> */}
         </VStack>
