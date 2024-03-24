@@ -5,7 +5,7 @@ import { BuyComponents } from '@/components/buy';
 import { useState } from 'react';
 import { Domains } from '@/types';
 import { identityAbi } from '@/config/abi';
-import { calculateDomainPrice } from '@/utils/calculator.ts';
+import { calculateDomainPrice } from '@/utils/calculator';
 import { useAccount, useWalletClient, useWriteContract } from 'wagmi';
 import { CONTRACT } from '@/config/addresses/contracts';
 import { config } from '@/providers/walletConnector/walletConfig';
@@ -21,7 +21,7 @@ const checkDomain = (domain: string) => {
 export default function Domain() {
   const router = useRouter()
   const { domain } = router.query
-  if(!domain) return null
+
   const { address,  } = useAccount()
   const { data } = useWalletClient()
   const { open } = useWeb3Modal()
@@ -57,6 +57,7 @@ export default function Domain() {
     console.debug('buying')
 
     writeContract({
+      // @ts-ignore
       bi: identityAbi,
       address: CONTRACT.IDENTITY,
       functionName: 'buyIdentity',
@@ -86,6 +87,8 @@ export default function Domain() {
 
     return <Connect onClick={() => open()} fill />;
   }
+
+  if(!domain) return null
 
   return (
     <Center w="full" h="full" display="flex" flexDir="column" py={2} px={{ base: 4, md: 20, xl: 40 }} zIndex={10}>

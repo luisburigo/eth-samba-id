@@ -12,7 +12,7 @@ export default function Purchased(){
   const router = useRouter()
   console.debug(router.query)
   const { handle } = router.query
-  if(!handle) return null
+
   console.debug(handle)
   // const [data, setData] = useState(null)
 
@@ -20,18 +20,21 @@ export default function Purchased(){
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
+    // @ts-ignore
     args: [handle],
   });
 
   useEffect(() => {
-
+    // @ts-ignore
     if(data?.name?.length <= 0) {
       router.push('/').then()
     } else {
       // setData(data)
     }
 
-  }, [])
+  }, []);
+
+  if(!handle) return null
 
   return (
     <Center w="full" h="full" display="flex" flexDir="column" py={2} px={{ base: 4, md: 20, xl: 40 }} zIndex={10}>
