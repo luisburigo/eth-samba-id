@@ -17,7 +17,7 @@ export default function Page() {
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: [identifier as string],x
+    args: [identifier as string],
   });
 
   const account = useAccount();
