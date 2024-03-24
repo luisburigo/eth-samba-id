@@ -4,8 +4,9 @@ import { BuyComponents } from '@/components/buy';
 // import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Domains } from '@/types';
+import { identityAbi } from '@/config/abi';
 import { calculateDomainPrice } from '@/utils/calculator.ts';
-import { useAccount, useReadContract, useWalletClient, useWriteContract } from 'wagmi';
+import { useAccount, useWalletClient, useWriteContract } from 'wagmi';
 import { CONTRACT } from '@/config/addresses/contracts';
 import { config } from '@/providers/walletConnector/walletConfig';
 
@@ -16,11 +17,10 @@ const checkDomain = (domain: string) => {
 
 export default function Domain() {
   const router = useRouter()
-  const domain = router.query.domain as string
+  const { domain } = router.query
+  if(!domain) return null
   const { address,  } = useAccount()
   const { data } = useWalletClient()
-  console.debug(data)
-  console.debug(router.query)
 
   const { writeContract, isPending } = useWriteContract({
     config,
@@ -34,66 +34,34 @@ export default function Domain() {
     },
   });
 
-  const identityData = useReadContract({
-    abi: 'identityAbi',
-    address: CONTRACT.IDENTITY,
-    functionName: 'getIdentity',
-    args: [domain],
-  });
-
   const [domains, setDomains] = useState<Domains[]>([{
-    name: domain,
+    name: domain as string,
     period: 1
   }])
 
   const totalPrice = domains.reduce(
     (previous, current) =>
-      previous + calculateDomainPrice(current.name, 1),
+      previous + calculateDomainPrice(current.name, current.period),
     0
   );
 
-  const handleConfirmDomain = async () => {
-    const isValid = checkDomain(domain);
-    if (!isValid) return;
-
-    // if should return from contract mutation
-    const info = null
-
-    // console.debug(info?.name)
-    return info
-  }
-
   const handleBuyDomain = async () => {
-    const isValid = checkDomain(domain);
-    // if (!isValid || ! wallet) return;
+    const isValid = checkDomain(domain as string);
+    if (!isValid || !address) return;
     if (!isValid) return;
 
     console.debug('buying')
 
-    // registerDomainMutation.mutate({
-    //   account: wallet,
-    //   resolver: wallet.address.toB256(),
-    //   domain: domain
-    // }, {
-    //   onSuccess: async (e) => {
-    //     console.debug(e)
-    //     await handleConfirmDomain();
-    //     // domainDetailsDialog.onOpen();
-    //     toast({
-    //       title: 'Success!',
-    //       status: 'success',
-    //       duration: 2000,
-    //       isClosable: true,
-    //     })
-    //     navigate({ to: '/checkout/$domain', params: { domain: domain }, startTransition: true }).then()
-    //   },
-    //   onError: e => console.log(e)
-    // });
+    writeContract({
+      bi: identityAbi,
+      address: CONTRACT.IDENTITY,
+      functionName: 'buyIdentity',
+      args: [domain]
+    })
   };
 
   const handlePeriodChange = (index: number, newValue: number) => {
     const newItems = [...domains];
-    // period not specified
     newItems[index] = { ...newItems[index], period: newValue };
     setDomains(newItems);
   };

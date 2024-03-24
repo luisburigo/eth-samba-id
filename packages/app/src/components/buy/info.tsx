@@ -18,7 +18,7 @@ const Info = ({ name, index, periodHandle }: InfoProps) => {
     <VStack w="full" key={name} spacing={5}>
       {index > 0 && <Divider w="80%" borderColor="link.500" />}
       <VStack w="full" spacing={0}>
-        <Input.TextInput value={`@${name}`} />
+        <Input.Text value={`@${name}`} />
         <Flex
           w="full"
           border="none"
@@ -29,7 +29,7 @@ const Info = ({ name, index, periodHandle }: InfoProps) => {
           justifyContent="space-around"
           alignItems="center"
         >
-          <Input.NumericInput
+          <Input.Numeric
             index={index}
             onChange={periodHandle}
             key={0}
