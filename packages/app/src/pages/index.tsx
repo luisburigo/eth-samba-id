@@ -53,9 +53,9 @@ export default function Page() {
                 () => {
                   if (data?.name?.length <= 0) {
                     router.push(`/form`)
-                  } else {
-                    router.push(`/profile/${data?.name}`)
-                  } 
+                  
+                  router.push(`/profile/${data?.name}`)
+                  
                 }
               }
             >
