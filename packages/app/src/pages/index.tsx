@@ -23,6 +23,9 @@ export default function Page() {
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
     args: [input],
+    query: {
+      enabled: !!input
+    }
   });
 
   const searchDomain = () => {
