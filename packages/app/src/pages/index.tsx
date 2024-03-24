@@ -22,18 +22,20 @@ export default function Page() {
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: [input],
+    args: [input ? `@${input}` : ''],
     query: {
       enabled: !!input
     }
   });
+
+  console.log(data);
 
   const searchDomain = () => {
     // @ts-ignore
     if (data?.name?.length <= 0) {
       router.push(`/form`)
     } else {
-      router.push(`/profile/${data?.name}`)
+      router.push(`/profile/@${data?.name}`)
     }
   }
 
