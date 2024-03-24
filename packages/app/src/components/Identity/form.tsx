@@ -12,6 +12,7 @@ import { useReadContract, useWriteContract } from 'wagmi';
 import { identityAbi } from '../../config/abi';
 import { CONTRACT } from '../../config/addresses/contracts';
 import { config } from '../../providers/walletConnector/walletConfig';
+import { useRouter } from 'next/router';
 
 interface IdentityForm {
   name: string;
@@ -24,6 +25,8 @@ interface IdentityForm {
 }
 
 export const Form = () => {
+  const router = useRouter()
+
   const {
     control,
     handleSubmit,
@@ -192,8 +195,14 @@ export const Form = () => {
             {errors.warpcaster && errors.warpcaster.message}
           </FormErrorMessage>
         </FormControl>
+
         <Button type="submit" isLoading={isPending} loadingText="Loading...">
           Submit
+        </Button>
+        <Button onClick={() => {
+          router.push('/')
+        }} isLoading={isPending} loadingText="Loading...">
+          Cancel
         </Button>
         <Code display="block" whiteSpace="pre" overflowX="auto">
           {JSON.stringify(

@@ -2,11 +2,6 @@ import { Center, Image } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
 export const Container = () => {
-  const router = useRouter()
-
-  const goHome = () => {
-    router.push('/').then();
-  };
 
   return (
     <Center
