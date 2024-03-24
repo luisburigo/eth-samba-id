@@ -1,5 +1,10 @@
 import type { AppProps } from 'next/app';
-import { Center, ChakraProvider, ColorModeScript, Container } from '@chakra-ui/react';
+import {
+  Center,
+  ChakraProvider,
+  ColorModeScript,
+  Container,
+} from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import '../theme/global.css';
 import { defaultTheme } from '@/theme/default';
@@ -9,11 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Web3ModalProvider>
       <ChakraProvider theme={defaultTheme}>
-        <ColorModeScript initialColorMode='dark' />
+        <ColorModeScript initialColorMode="dark" />
         <Container
           w="full"
           maxW="full"
-          h="100vh"
+          minH="100vh"
           bgColor="background.500"
           display="flex"
           flexDir="column"
@@ -28,5 +33,5 @@ export default function App({ Component, pageProps }: AppProps) {
         </Container>
       </ChakraProvider>
     </Web3ModalProvider>
-  )
+  );
 }
