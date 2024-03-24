@@ -9,8 +9,8 @@ interface InputProps {
 }
 
 export const SearchDomain = ({ onChange, errorMessage, available }: InputProps) => {
-  const [inputValue, setInputValue] = useState("");
-  console.debug(available)
+  const [inputValue, setInputValue] = useState('');
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value.substring(0));
     onChange(e);
@@ -37,7 +37,7 @@ export const SearchDomain = ({ onChange, errorMessage, available }: InputProps) 
           onChange={handleChange}
           border="none"
           borderRadius={10}
-          sx={{ _placeholder: { color: "text.500" } }}
+          sx={{ _placeholder: { color: 'text.500' } }}
           _focus={{}}
           _hover={{}}
           _focusVisible={{}}
@@ -45,8 +45,9 @@ export const SearchDomain = ({ onChange, errorMessage, available }: InputProps) 
         {available !== null && (
           <InputRightElement
             pointerEvents="none"
-            children={available ? <SuccessBadge /> : <ErrorBadge />}
-          />
+          >
+            {available ? <SuccessBadge /> : <ErrorBadge />}
+          </InputRightElement>
         )}
 
       </InputGroup>
@@ -56,4 +57,4 @@ export const SearchDomain = ({ onChange, errorMessage, available }: InputProps) 
       )}
     </>
   );
-}
+};
