@@ -6,11 +6,12 @@ export const GoBack = () => {
   const route = useRouter();
 
   const handleGoBack = () => {
-    route.replace('/').then();
+    route.push('/')
   };
 
   return (
     <Button
+      onClick={handleGoBack}
       variant="ghost"
       display="flex"
       alignSelf="start"
@@ -21,7 +22,7 @@ export const GoBack = () => {
       _hover={{}}
       color="white"
     >
-      <ChevronLeftIcon onClick={handleGoBack} />
+      <ChevronLeftIcon/>
       Back
     </Button>
   );
