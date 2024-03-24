@@ -55,7 +55,7 @@ export default function Page() {
         padding={{ base: 4, md: 0 }}
         maxW="30rem"
       >
-        <Home.Hero title="Your web3 username" description="Your identity across web3, one name for all your crypto addresses, and your decentralised website." />
+        <Home.Hero title="Ignite Your Identity with a Handles" description="Secure & scalable human readable addresses. Natively designed with the modular ecosystem in mind." />
         <FormControl
           w="full"
           display="flex"

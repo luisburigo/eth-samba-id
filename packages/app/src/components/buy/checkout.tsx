@@ -12,19 +12,14 @@ interface CheckoutProps {
 
 export const Checkout = ({ length, totalPrice, networkFee }: CheckoutProps) => {
 
-  const multipleBuys = length > 1 ? 'Domains' : 'Domain'
-
   return (
     <VStack
       w="full"
-      bg="input.500"
+      bg="#2b2a2a"
       p=".5rem 1rem 1rem 1rem"
       borderRadius={8}
     >
       <HStack w="full">
-        <Text fontSize="medium" fontWeight={600} color="white">
-          {`${length} Domain`}
-        </Text>
         <Spacer />
         {/* <HStack bg={"#35302F"} p={2} spacing={2} borderRadius={10}>
                 <ChakraButton
@@ -54,34 +49,33 @@ export const Checkout = ({ length, totalPrice, networkFee }: CheckoutProps) => {
                 </ChakraButton>
               </HStack> */}
       </HStack>
-      <VStack w="full" spacing={1} bg="#484240" p={3} borderRadius={10}>
+
         <Flex w="full" justifyContent="space-between">
-          <Text color="text.500" fontSize="sm">
-            {multipleBuys}
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }}>
+            Handles
           </Text>
-          <Text color="text.500" fontSize="sm">
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }}>
             {formatCoin(totalPrice, ETH)}
           </Text>
         </Flex>
         <Flex w="full" justifyContent="space-between">
-          <Text color="text.500" fontSize="sm">
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }}>
             Estimated network fee
           </Text>
           <Spacer />
-          <Text color="text.500" fontSize="sm">
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }}>
             {formatCoin(networkFee, ETH)}
           </Text>
         </Flex>
         <HStack w="full">
-          <Text color="text.500" fontSize="sm" fontWeight="bold">
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }} fontWeight="bold">
             Estimated total
           </Text>
           <Spacer />
-          <Text color="text.500" fontSize="sm" fontWeight="bold">
+          <Text color="text.500" fontSize={{ base: "xs", md: "sm" }} fontWeight="bold">
             {formatCoin(totalPrice + networkFee, ETH)}
           </Text>
         </HStack>
-      </VStack>
     </VStack>
   )
 }

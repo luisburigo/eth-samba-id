@@ -1,4 +1,4 @@
-import { Box, Button, Input } from "@chakra-ui/react";
+import { Box, Button, Input } from '@chakra-ui/react';
 import { useState } from 'react';
 
 interface NumericInputProps {
@@ -24,13 +24,14 @@ export const NumericInput = ({index, onChange }: NumericInputProps) => {
     <Box
       display="flex"
       alignItems="center"
-      backgroundColor="inherit"
-      border="2px solid #686361"
-      borderRadius="10px"
       w="fit-content"
+      border="1px solid #2B2927"
+      borderRadius={10}
+      backgroundColor="#151413"
+      p={1}
     >
       <Button
-        color="brand.200"
+        color="#FFF"
         backgroundColor="inherit"
         fontSize={24}
         isDisabled={period <= 1}
@@ -56,7 +57,7 @@ export const NumericInput = ({index, onChange }: NumericInputProps) => {
         p={0}
       />
       <Button
-        color="brand.200"
+        color="#FFF"
         backgroundColor="inherit"
         fontSize={24}
         onClick={increment}

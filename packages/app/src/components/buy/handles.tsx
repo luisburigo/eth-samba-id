@@ -1,13 +1,16 @@
 import { Box, Text, VStack } from '@chakra-ui/react';
 // import Add from '../Add';
 
-const Domains = ({ children }) => {
+const Handles = ({ children }) => {
   return (
     <Box w="full">
       <Text color="section.200" fontWeight={600} marginBottom={4}>
-        Domains
+        Handles
       </Text>
-      <VStack spacing={5}>
+      <Text color="grey.200" fontSize={{ base: "xs", md: "sm" }}>
+        Set how many years do you want to be owner of this Handles.
+      </Text>
+      <VStack spacing={5} mt={3}>
         {children}
       </VStack>
       {/*<Modal*/}
@@ -28,4 +31,4 @@ const Domains = ({ children }) => {
   )
 }
 
-export { Domains }
+export { Handles }
