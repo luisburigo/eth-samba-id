@@ -73,7 +73,7 @@ export default function Purchased(){
           </Button>
 
           <TwitterShareButton
-            url="http://localhost:5173/"
+            url={window.location.host}
             title="Create your web3 handle!"
             hashtags={["web3", "legacydomains"]}
             related={[]}

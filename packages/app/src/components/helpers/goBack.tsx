@@ -17,7 +17,6 @@ export const GoBack = () => {
       alignSelf="start"
       gap={3}
       px={0}
-      pl={{ base: 2, md: 7 }}
       fontSize="xs"
       _hover={{}}
       color="white"
