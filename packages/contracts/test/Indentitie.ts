@@ -64,7 +64,7 @@ describe("[Indentity]", () => {
         })
 
 
-        it("Create with invalid name", async () => {
+        it("Create with invalid conditions", async () => {
             const {_id} = await loadFixture(deploy);
             const payload = moclId()
 
