@@ -149,7 +149,7 @@ export const Form = () => {
         </FormControl>
         <FormControl isInvalid={!!errors.ipfs}>
           <FormLabel color="white">IPFS</FormLabel>
-          <Input onChange={handlers.onInputFileUpload} type="file" color="white" placeholder="IPFS" />
+          <Input accept="text/html" onChange={handlers.onInputFileUpload} type="file" color="white" placeholder="IPFS" />
           <FormErrorMessage>
             {errors.ipfs && errors.ipfs.message}
           </FormErrorMessage>
