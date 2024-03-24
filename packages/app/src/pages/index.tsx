@@ -59,7 +59,7 @@ export default function Page() {
         padding={{ base: 4, md: 0 }}
         maxW="30rem"
       >
-        <Home.Hero title="Ignite Your Identity with a Handles" description="Secure & scalable human readable addresses. Natively designed with the modular ecosystem in mind." />
+        <Home.Hero title="Ignite Your Identity with a Index" description="Secure & scalable human readable addresses. Natively designed with the modular ecosystem in mind." />
         <FormControl
           w="full"
           display="flex"
