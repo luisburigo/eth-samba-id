@@ -1,3 +1,4 @@
+import { ProfileComponents } from '@/components/Profile';
 import { GoBack } from '@/components/helpers/goBack';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
@@ -121,6 +122,7 @@ export default function Page() {
       <GoBack />
       <Center w="full" h="full" pt={14}>
         <VStack w="full" h="full" maxW="42rem" gap={3}>
+          <ProfileComponents.Hero name={identityData?.data?.name ?? ''} />
           <Text fontSize="x-large" fontWeight={700}>
             Edit Profile
           </Text>
