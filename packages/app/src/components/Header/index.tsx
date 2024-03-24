@@ -1,4 +1,4 @@
-import { Container } from './container.tsx';
+import { Container } from './container';
 
 export const Header = {
   Container,
