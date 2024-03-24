@@ -19,6 +19,7 @@
     "@tanstack/react-router": "^1.22.3",
     "@tanstack/router-devtools": "^1.22.3",
     "@web3modal/wagmi": "^4.1.1",
+    "ethers": "^5.4.7",
     "framer-motion": "^11.0.20",
     "multiparty": "^4.2.3",
     "next": "14.1.4",
