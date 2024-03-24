@@ -1,17 +1,31 @@
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import {
-  VStack,
-  Input,
   Button,
+  Code,
   FormControl,
   FormErrorMessage,
-  FormLabel,
-  Code,
+  FormLabel, Icon,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  ModalProps,
+  useDisclosure,
+  VStack
 } from '@chakra-ui/react';
 import { useReadContract, useWriteContract } from 'wagmi';
 import { identityAbi } from '../../config/abi';
 import { CONTRACT } from '../../config/addresses/contracts';
 import { config } from '../../providers/walletConnector/walletConfig';
+import { FileUpload } from '@/components/input/file';
+import { FiFile } from 'react-icons/fi';
+import { useIpfsUploader } from '@/hooks/useIpfsUploader';
 
 interface IdentityForm {
   name: string;
@@ -24,10 +38,12 @@ interface IdentityForm {
 }
 
 export const Form = () => {
+  const { handlers } = useIpfsUploader();
   const {
     control,
     handleSubmit,
     formState: { errors },
+    register
   } = useForm<IdentityForm>({
     defaultValues: {
       name: '',
@@ -36,8 +52,8 @@ export const Form = () => {
       ipfs: '',
       github: '',
       twitter: '',
-      warpcaster: '',
-    },
+      warpcaster: ''
+    }
   });
 
   const { writeContract, isPending } = useWriteContract({
@@ -48,19 +64,19 @@ export const Form = () => {
       },
       onError: (error) => {
         console.log({ ERROR: error });
-      },
-    },
+      }
+    }
   });
 
   const identityData = useReadContract({
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: ['Pedro'],
+    args: ['Pedro']
   });
 
-  const onSubmit = (data: IdentityForm) => {
-    console.log(data);
+  const onSubmit = async (data: IdentityForm) => {
+    const fileUploadResult = await handlers.handleFileUpload(data.name);
     writeContract({
       abi: identityAbi,
       address: CONTRACT.IDENTITY,
@@ -69,11 +85,11 @@ export const Form = () => {
         data.name,
         BigInt(data.validAt),
         data.nft,
-        data.ipfs,
+        fileUploadResult.data.ipfs,
         data.github,
         data.twitter,
-        data.warpcaster,
-      ],
+        data.warpcaster
+      ]
     });
   };
 
@@ -134,15 +150,7 @@ export const Form = () => {
         </FormControl>
         <FormControl isInvalid={!!errors.ipfs}>
           <FormLabel color="white">IPFS</FormLabel>
-          <Controller
-            name="ipfs"
-            control={control}
-            defaultValue=""
-            rules={{ required: 'IPFS is required' }}
-            render={({ field }) => (
-              <Input {...field} color="white" placeholder="IPFS" />
-            )}
-          />
+          <Input onChange={handlers.onInputFileUpload} type="file" color="white" placeholder="IPFS" />
           <FormErrorMessage>
             {errors.ipfs && errors.ipfs.message}
           </FormErrorMessage>
@@ -199,7 +207,7 @@ export const Form = () => {
           {JSON.stringify(
             {
               ...identityData.data,
-              validAt: identityData.data?.validAt.toString(),
+              validAt: identityData.data?.validAt.toString()
             },
             null,
             2

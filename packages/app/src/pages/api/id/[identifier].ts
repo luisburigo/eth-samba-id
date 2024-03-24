@@ -20,7 +20,7 @@ export default async function handler(
   const { identifier } = request.query;
   const identity = await getIdentity(identifier as string);
 
-  if (identity.ipfs && identity.ipfs.includes('cf-ipfs.com')) {
+  if (identity.ipfs && identity.ipfs.includes('ipfs.io')) {
     return response.status(304).redirect(identity.ipfs);
   }
 
