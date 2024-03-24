@@ -4,27 +4,16 @@ import {
   Code,
   FormControl,
   FormErrorMessage,
-  FormLabel, Icon,
+  FormLabel,
   Input,
-  InputGroup,
-  InputRightElement,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  ModalProps,
-  useDisclosure,
   VStack
 } from '@chakra-ui/react';
-import { useReadContract, useWriteContract } from 'wagmi';
+import { useWriteContract } from 'wagmi';
 import { identityAbi } from '../../config/abi';
 import { CONTRACT } from '../../config/addresses/contracts';
 import { config } from '../../providers/walletConnector/walletConfig';
-import { FileUpload } from '@/components/input/file';
-import { FiFile } from 'react-icons/fi';
+import { useAccount } from 'wagmi';
+
 import { useIpfsUploader } from '@/hooks/useIpfsUploader';
 import { useRouter } from 'next/router';
 
@@ -42,6 +31,7 @@ interface IdentityForm {
 export const Form = () => {
    const router = useRouter();
   const { handlers } = useIpfsUploader();
+  const { address } = useAccount()
 
   const {
     control,
@@ -63,8 +53,8 @@ export const Form = () => {
   const { writeContract, isPending } = useWriteContract({
     config,
     mutation: {
-      onSuccess: (data) => {
-        router.push(`/profile/${getValues('name')}`)
+      onSuccess: async (data) => {
+        await router.push(`/profile/@${getValues('name')}`)
       },
       onError: (error) => {
         console.log({ ERROR: error });
@@ -73,21 +63,22 @@ export const Form = () => {
   });
 
   const onSubmit = async (data: IdentityForm) => {
-    const fileUploadResult = await handlers.handleFileUpload(data.name);
+    const fileUploadResult = await handlers.handleFileUpload(`@${data.name}`);
     writeContract({
       abi: identityAbi,
       address: CONTRACT.IDENTITY,
       functionName: 'createIdentity',
       args: [
         // @ts-ignore
-        data.name,
-        // @ts-ignore
         BigInt(data.validAt),
         data.nft,
-        fileUploadResult.data.ipfs,
+        // @ts-ignore
+        `@${data.name}`,
+        fileUploadResult?.data?.ipfs ?? '',
         data.github,
         data.twitter,
-        data.warpcaster
+        data.warpcaster,
+        address!
       ]
     });
   };
