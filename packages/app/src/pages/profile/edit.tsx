@@ -16,6 +16,7 @@ import {
   useToast,
   Text,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useReadContract, useWriteContract } from 'wagmi';
@@ -30,13 +31,16 @@ interface IdentityForm {
 }
 
 export default function Page() {
+  const router = useRouter();
   const toast = useToast();
+
+  const { identifier } = router.query;
 
   const identityData = useReadContract({
     abi: identityAbi,
     address: CONTRACT.IDENTITY,
     functionName: 'getIdentity',
-    args: ['PedroPedro'],
+    args: [identifier as string],
   });
 
   const {
