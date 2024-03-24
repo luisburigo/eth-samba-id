@@ -10,6 +10,7 @@ struct IdentityStruct {
     string github;
     string twitter;
     string warpcaster;
+    address resolver;
 }
 
 contract Identity {
@@ -21,13 +22,15 @@ contract Identity {
         owner = payable(msg.sender);
     }
 
-    function createIdentity(string memory name, 
+    function createIdentity(
         uint validAt, 
-        string memory nft, 
+        string memory nft,
+        string memory name, 
         string memory ipfs, 
         string memory github, 
         string memory twitter, 
-        string memory warpcaster
+        string memory warpcaster,
+        address resolver
     ) public payable {
 
         //valida balance
@@ -57,7 +60,8 @@ contract Identity {
             ipfs, 
             github, 
             twitter, 
-            warpcaster
+            warpcaster,
+            resolver
         );
 
         // Pagar o owner
@@ -69,8 +73,15 @@ contract Identity {
     }
 
 
-
-
+    function setResolver(string memory name, address resolver) public {
+        IdentityStruct storage identity = identities[name];
+        require(
+            msg.sender == identity.owner,
+            "You are not the owner of this identity"
+        );
+        
+        identity.resolver = resolver;
+    }
 
 
 
@@ -126,4 +137,6 @@ contract Identity {
     - Calculate price -> ok
     - Add validAt time -> ok
     - Add name string validations -> ok
+    - Add renew identity
+    - Add set datas
   */  

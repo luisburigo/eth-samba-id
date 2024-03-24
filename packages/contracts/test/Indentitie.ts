@@ -14,7 +14,8 @@ const moclId = () => {
         ipfs: `ipfs${crypto.randomUUID()}`,
         github: `github${crypto.randomUUID()}`,
         twitter: `twitter${crypto.randomUUID()}`,
-        warpcaster: `warpcaster${crypto.randomUUID()}`
+        warpcaster: `warpcaster${crypto.randomUUID()}`,
+        resolver: ethers.Wallet.createRandom().address
     }
 }
 
@@ -41,19 +42,20 @@ describe("[Indentity]", () => {
             const {_id} = await loadFixture(deploy);
             const payload = moclId()
             const nextYear = new Date().getTime() + (60*60*24*365*1000)
-
+            
 
             const registrationFee = await _id.calculateRegistrationFee(payload.name, 1);
             const formattedFee = ethers.utils.formatUnits(registrationFee, "ether");
 
             await _id.createIdentity(
-                payload.name,
                 payload.validAt,
                 payload.nft,
+                payload.name,
                 payload.ipfs,
                 payload.github,
                 payload.twitter,
                 payload.warpcaster,
+                payload.resolver,
                 { value: ethers.utils.parseEther(formattedFee) }
             ) 
             
@@ -63,6 +65,36 @@ describe("[Indentity]", () => {
             expect(payload.validAt - nextYear).to.lessThanOrEqual(1000*60)//menor que 1 min
         })
 
+        it("Set resolver", async () => {
+            const {_id} = await loadFixture(deploy);
+            const payload = moclId()
+            
+            const registrationFee = await _id.calculateRegistrationFee(payload.name, 1);
+            const formattedFee = ethers.utils.formatUnits(registrationFee, "ether");
+
+            await _id.createIdentity(
+                payload.validAt,
+                payload.nft,
+                payload.name,
+                payload.ipfs,
+                payload.github,
+                payload.twitter,
+                payload.warpcaster,
+                payload.resolver,
+                { value: ethers.utils.parseEther(formattedFee) }
+            )
+
+            //set resolver
+            const newResolver = ethers.Wallet.createRandom().address
+            await _id.setResolver(payload.name, newResolver)
+            const name = await _id.getIdentity(payload.name)
+            expect(newResolver).to.equal(name.resolver)
+
+            //inválid resolver
+            const {_id: _id2} = await loadFixture(deploy);
+            await expect(_id2.setResolver(payload.name, newResolver)).to.be.revertedWith("You are not the owner of this identity")
+
+        })
 
         it("Create with invalid conditions", async () => {
             const {_id} = await loadFixture(deploy);
@@ -71,48 +103,51 @@ describe("[Indentity]", () => {
             const registrationFee = await _id.calculateRegistrationFee(payload.name, 1);
             const formattedFee = ethers.utils.formatUnits(registrationFee, "ether");
 
-
             await expect(_id.createIdentity(
-                payload.name.slice(0, 2),
                 payload.validAt,
                 payload.nft,
+                payload.name.slice(0, 2),
                 payload.ipfs,
                 payload.github,
                 payload.twitter,
                 payload.warpcaster,
+                payload.resolver,
                 { value: ethers.utils.parseEther('10') }
             )).to.be.revertedWith("Insufficient funds")
 
             await expect(_id.createIdentity(
-                payload.name.slice(0, 2),
                 payload.validAt,
                 payload.nft,
+                payload.name.slice(0, 2),
                 payload.ipfs,
                 payload.github,
                 payload.twitter,
                 payload.warpcaster,
+                payload.resolver,
                 { value: ethers.utils.parseEther(formattedFee) }
             )).to.be.revertedWith("Name must have at least 3 characters")
 
             await expect(_id.createIdentity(
-                payload.name,
                 payload.validAt,
                 payload.nft,
+                payload.name,
                 payload.ipfs,
                 payload.github,
                 payload.twitter,
                 payload.warpcaster,
+                payload.resolver,
                 { value: ethers.utils.parseEther(formattedFee) }
             ))
 
             await expect(_id.createIdentity(
-                payload.name,
                 payload.validAt,
                 payload.nft,
+                payload.name,
                 payload.ipfs,
                 payload.github,
                 payload.twitter,
                 payload.warpcaster,
+                payload.resolver,
                 { value: ethers.utils.parseEther(formattedFee) }
             )).to.be.revertedWith("Name already registered")
         })
