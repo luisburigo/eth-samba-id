@@ -168,15 +168,17 @@ contract Identity {
 }
 
 /*todo: 
-    - Add logic to resolvers
+    - Add logic to resolvers -> ok
         - Add resolver
         - Set resolver
         - Always verified by owner request
-    - Add generation NFT on creation
-    - Add reverse verify [address -> metadata]
     - Calculate price -> ok
     - Add validAt time -> ok
     - Add name string validations -> ok
-    - Add renew identity
-    - Add set datas
+    - Add renew identity -> ok
+    - Add set datas -> ok
+
+    [pending]:
+    - Add generation NFT on creation
+    - Add reverse verify [address -> metadata]
   */  
