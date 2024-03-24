@@ -4,7 +4,7 @@ import { Input } from '@/components/input';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
 import { useReadContract } from 'wagmi';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 
 export default function Page() {
@@ -53,14 +53,15 @@ export default function Page() {
                 () => {
                   if (data?.name?.length <= 0) {
                     router.push(`/form`)
-                  
-                  router.push(`/profile/${data?.name}`)
-                  
+                  } else {
+                    router.push(`/profile/${data?.name}`)
+                  } 
                 }
               }
             >
               { data?.name?.length <= 0  ? 'Buy Domain' : 'Check domain' }
             </Button>
+
           </VStack>
         </Box>
       </VStack>
