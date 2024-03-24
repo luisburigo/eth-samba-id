@@ -1,7 +1,7 @@
 import { ProfileComponents } from '@/components/Profile';
 import { VStack, Center } from '@chakra-ui/react';
 import { GoBack } from '@/components/helpers/goBack';
-import { useAccount, useReadContract } from 'wagmi';
+import { useReadContract } from 'wagmi';
 import { identityAbi } from '@/config/abi';
 import { CONTRACT } from '@/config/addresses/contracts';
 import { useRouter } from 'next/router'
@@ -17,8 +17,6 @@ export default function Page() {
     functionName: 'getIdentity',
     args: [identifier as string],
   });
-
-  const account = useAccount();
 
   if (identityData.isLoading) {
     return <div>Loading...</div>;
