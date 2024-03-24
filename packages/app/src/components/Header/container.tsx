@@ -13,15 +13,12 @@ export const Container = () => {
       as="header"
       w="full"
       display="flex"
-      justifyContent="space-between"
+      justifyContent="center"
       alignItems="center"
       py={2}
       px={{ base: 0, md: 20, xl: 40 }}
       className="transition-all-05"
     >
-      <button onClick={goHome}>
-        <Image src="./symbol.svg" width={190} height={75} alt="Bako logo" />
-      </button>
       <w3m-button />
     </Center>
   );
