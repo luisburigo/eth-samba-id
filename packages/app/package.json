@@ -19,6 +19,8 @@
     "@tanstack/react-router": "^1.22.3",
     "@tanstack/router-devtools": "^1.22.3",
     "@web3modal/wagmi": "^4.1.1",
+    "react-hook-form": "^7.51.1",
+    "react-icons": "^5.0.1",
     "multiparty": "^4.2.3",
     "next": "14.1.4",
     "react": "^18",
