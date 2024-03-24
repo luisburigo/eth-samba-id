@@ -19,8 +19,8 @@ export const SearchDomain = ({ onChange, errorMessage, available }: InputProps) 
   return (
     <>
       <InputGroup borderRightColor="transparent" border="none">
-        <InputLeftAddon borderLeftColor="transparent" bgColor="background.400" color="white" border="none">
-          #
+        <InputLeftAddon borderLeftColor="transparent" bgColor="background.400" color="#868079" border="none">
+          @
         </InputLeftAddon>
         <ChakraInput
           value={inputValue}
