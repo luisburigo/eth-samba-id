@@ -26,6 +26,7 @@ import { config } from '../../providers/walletConnector/walletConfig';
 import { FileUpload } from '@/components/input/file';
 import { FiFile } from 'react-icons/fi';
 import { useIpfsUploader } from '@/hooks/useIpfsUploader';
+import { useRouter } from 'next/router';
 
 interface IdentityForm {
   name: string;
@@ -38,12 +39,13 @@ interface IdentityForm {
 }
 
 export const Form = () => {
+  const router = useRouter();
   const { handlers } = useIpfsUploader();
   const {
     control,
     handleSubmit,
     formState: { errors },
-    register
+    getValues
   } = useForm<IdentityForm>({
     defaultValues: {
       name: '',
@@ -60,19 +62,12 @@ export const Form = () => {
     config,
     mutation: {
       onSuccess: (data) => {
-        console.log({ SUCCESS: data });
+        router.push(`/profile/${getValues('name')}`)
       },
       onError: (error) => {
         console.log({ ERROR: error });
       }
     }
-  });
-
-  const identityData = useReadContract({
-    abi: identityAbi,
-    address: CONTRACT.IDENTITY,
-    functionName: 'getIdentity',
-    args: ['Pedro']
   });
 
   const onSubmit = async (data: IdentityForm) => {
@@ -82,7 +77,9 @@ export const Form = () => {
       address: CONTRACT.IDENTITY,
       functionName: 'createIdentity',
       args: [
+        // @ts-ignore
         data.name,
+        // @ts-ignore
         BigInt(data.validAt),
         data.nft,
         fileUploadResult.data.ipfs,
@@ -203,16 +200,6 @@ export const Form = () => {
         <Button type="submit" isLoading={isPending} loadingText="Loading...">
           Submit
         </Button>
-        <Code display="block" whiteSpace="pre" overflowX="auto">
-          {JSON.stringify(
-            {
-              ...identityData.data,
-              validAt: identityData.data?.validAt.toString()
-            },
-            null,
-            2
-          )}
-        </Code>
       </VStack>
     </form>
   );
